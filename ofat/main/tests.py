@@ -14,9 +14,13 @@ class HomePageTest(TestCase):
         self.assertEqual(found.func, homepage)
 
     def test_home_page_returns_correct_html(self):
+        from django.contrib.auth.forms import UserCreationForm
+        from main.forms import UserProfileForm
         request = HttpRequest()
         response = homepage(request)
-        expected_html = render_to_string('main/home.html')
+        expected_html = render_to_string('main/home.html',
+                                         {'userform': UserCreationForm(),
+                                          'profileform': UserProfileForm()})
         self.assertEqual(response.content.decode(), expected_html)
 
     def test_home_page_can_save_POST_request(self):

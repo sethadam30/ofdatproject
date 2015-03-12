@@ -4,6 +4,10 @@
   </head>
   <body>
     <header><h1>OFAT</h1></header>
+
+    {% if registered %}
+    <p>Registration was succesful. You can now login with your login credentials.</p>
+    {% endif %}
     
     <div id="registration">
       <h1>Create an account</h1>

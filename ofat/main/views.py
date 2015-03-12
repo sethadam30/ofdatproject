@@ -5,7 +5,12 @@ from django.http import HttpResponse
 def homepage(request):
     from django.contrib.auth.forms import UserCreationForm
     from main.forms import UserProfileForm
+
+    registered = False
+    if request.method == 'POST':
+        registered = True
     
     return render(request, 'main/home.html',
                   {'userform': UserCreationForm(),
-                   'profileform': UserProfileForm()})
+                   'profileform': UserProfileForm(),
+                   'registered': registered})
