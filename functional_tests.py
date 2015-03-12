@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
 
 class NewVisitorTest(unittest.TestCase):
@@ -10,15 +11,27 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
 
     def test_can_sign_up(self):
-        #When a user arrives at the OFAT homepage the following information
-        #should be available: OFAT in title, signup/login, tabs for about,
-        #contact
+        #When a user arrives at the OFAT homepage the following
+        #information should be available: OFAT in title and header,
+        #signup/login, tabs for about, contact
 
         self.browser.get('http://localhost:8000')
         self.assertIn('OFAT', self.browser.title)
-        self.fail('Finish the test!')
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('OFAT', header_text)
         
         #The user is not yet registered and signs up
+        #User goes to the registration page
+
+        #User looks for the inputbox for his name
+        inputbox = self.browser.find_element_by_id('id_name')
+        self.assertEqual(
+            inputbox.get_attribute('placeholder'),
+            'Your name'
+        )
+        #User types his name
+        inputbox.send_keys('Test User')
+        inputbox.send_keys(Keys.ENTER)
 
         #After signing up and logging in it no longer displays the
         #informational login, but the standard webapp layout for logged in
