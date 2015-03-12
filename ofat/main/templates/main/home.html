@@ -3,7 +3,25 @@
     <title>OFAT</title>
   </head>
   <body>
-    <h1>OFAT</h1>
+    <header><h1>OFAT</h1></header>
+    
+    <div id="registration">
+      <h1>Create an account</h1>
+      <form action="." method="post">
+	{% csrf_token %}
+	<p>
+	  {{ userform }}
+	</p>
+	<p>
+	  {{ profileform }}
+	</p>
+	<p>
+	  <input type="submit" value="Create the account" />
+	</p>
+	<p>
+	  (*): Required items.
+	</p>
+    </div>
     
     <address>
       <a href="mailto:christophe.vanneste@ugent.be"></a>
