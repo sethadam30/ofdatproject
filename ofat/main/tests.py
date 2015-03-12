@@ -37,13 +37,8 @@ class HomePageTest(TestCase):
 class UserProfileModelTest(TestCase):
     def test_saving_and_retrieving_profiles(self):
         from django.contrib.auth.models import User
-        u1 = User()
-        u1.username = 'user1'
-        u1.save()
-
-        u2 = User()
-        u2.username = 'user2'
-        u2.save()
+        u1 = User.objects.create(username = 'user1')
+        u2 = User.objects.create(username = 'user2')
                 
         profile1 = UserProfile()
         profile1.user = u1
