@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 # Create your views here.
@@ -8,7 +8,10 @@ def homepage(request):
 
     registered = False
     if request.method == 'POST':
-        registered = True
+        return redirect('/?registration=success')
+
+        if request.method == 'GET' and request.GET['registration'] == 'success':
+            registered = True
     
     return render(request, 'main/home.html',
                   {'userform': UserCreationForm(),

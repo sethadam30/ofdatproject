@@ -29,7 +29,10 @@ class HomePageTest(TestCase):
         request.POST['username'] = 'Test user'
 
         response = homepage(request)
-        self.assertIn('Registration was succesful',response.content.decode())
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/?registration=success')
+        #self.assertIn('Registration was succesful',response.content.decode())
         
     def test_bootstrap_available(self):
         self.assertTrue(os.path.exists('static/css/bootstrap.min.css'))
