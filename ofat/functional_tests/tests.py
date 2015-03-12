@@ -1,8 +1,8 @@
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import unittest
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
@@ -15,7 +15,7 @@ class NewVisitorTest(unittest.TestCase):
         #information should be available: OFAT in title and header,
         #signup/login, tabs for about, contact
 
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self.live_server_url)
         self.assertIn('OFAT', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('OFAT', header_text)
@@ -39,6 +39,3 @@ class NewVisitorTest(unittest.TestCase):
 
         #After signing up and having a first view of the full web app the user
         #quits OFAT
-
-if __name__ == '__main__':
-    unittest.main(warnings='ignore')
