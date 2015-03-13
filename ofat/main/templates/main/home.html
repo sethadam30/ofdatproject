@@ -1,8 +1,6 @@
-<html>
-  <head>
-    <title>OFAT</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+
+{% block content %}
     <header><h1>OFAT</h1></header>
 
     {% if registered %}
@@ -26,9 +24,4 @@
 	  (*): Required items.
 	</p>
     </div>
-    
-    <address>
-      <a href="mailto:christophe.vanneste@ugent.be"></a>
-    </address>
-  </body>
-</html>
+{% endblock %}
