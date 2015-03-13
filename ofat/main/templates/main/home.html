@@ -3,6 +3,11 @@
 
 {% block content %}
 
+<!--/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}-->
 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -15,12 +20,14 @@
           <a class="navbar-brand" href="#">OFAT</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form action="/login" class="navbar-form navbar-right">
+          <form action="/accounts/login/" class="navbar-form navbar-right" method="post">
+	    {% csrf_token %}
+	    <input type="hidden" name="next" value="/forum/" />
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input type="text" placeholder="User" class="form-control" name="username">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" placeholder="Password" class="form-control" name="password">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
@@ -55,7 +62,7 @@
         </div>
         <div class="col-md-4">
           <h2>Tools</h2>
-          <p>In the first wave of tools the following tools are already available in OFAT:<br />
+          <p>In the first wave of tools the following tools will be available in OFAT:<br />
 	    The STR analysis tools STRait Razor and TSSV. The general DNA analysis tool MyFLq. A mitochondrial analysis tool ... </p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
        </div>
@@ -64,18 +71,20 @@
           <p>OFAT can be installed locally, which is advisable when
           working on forensic cases. For online experimentation and
           access to the knowledge base, registration is required.</p>
-          <p><a class="btn btn-default" href="#" role="button">Register &raquo;</a></p>
+          <p><button class="btn btn-default"  onclick="$('#registration').toggle()">Register &raquo;</button></p>
         </div>
       </div>
 
 
-    {% if registered %}
-    <div class="row">
-      <p>Registration was succesful. You can now login with your login credentials.</p>
+      {% if registered %}
+      <hr />
+    <div class="alert alert-success" role="alert">
+      <p>Registration was succesful. You can now login with your credentials.</p>
     </div>
     {% endif %}
     
-    <div id="registration">
+    <div id="registration" style="display:none;">
+      <hr />
       <div class="row">
 	<h2>Create an account</h2>
       </div>

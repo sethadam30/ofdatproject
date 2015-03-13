@@ -7,13 +7,21 @@ def homepage(request):
     from main.forms import UserProfileForm
 
     registered = False
+    uform = UserCreationForm()
+    pform = UserProfileForm()
     if request.method == 'POST':
-        return redirect('/?registration=success')
+        uform = UserCreationForm(request.POST)
+        pform = UserProfileForm(request.POST)
+        if uform.is_valid() and pform.is_valid():
+            new_user = uform.save()
+            pform.instance.user = new_user
+            pform.save()
+            return redirect('/?registration=success')
 
-        if request.method == 'GET' and request.GET['registration'] == 'success':
-            registered = True
+    if request.method == 'GET' and 'registration' in request.GET:
+        registered = True
     
     return render(request, 'main/home.html',
-                  {'userform': UserCreationForm(),
-                   'profileform': UserProfileForm(),
+                  {'userform': uform,
+                   'profileform': pform,
                    'registered': registered})

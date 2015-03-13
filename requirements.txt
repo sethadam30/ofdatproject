@@ -1,4 +1,5 @@
 #Python pip requirements
 django
 django-bootstrap3
-django-forums
+pybbm
+bbcode
