@@ -1,25 +1,32 @@
 {% extends 'base.html' %}
+{% load bootstrap3 %}
 
 {% block content %}
-    <header><h1>OFAT</h1></header>
+    <header><h1>OFAT: Open Forensic Analysis Toolbox</h1></header>
 
     {% if registered %}
-    <p>Registration was succesful. You can now login with your login credentials.</p>
+    <div class="row">
+      <p>Registration was succesful. You can now login with your login credentials.</p>
+    </div>
     {% endif %}
     
     <div id="registration">
-      <h1>Create an account</h1>
-      <form action="." method="post">
+      <div class="row">
+	<h1>Create an account</h1>
+      </div>
+      <form action="." method="post" class="form">
 	{% csrf_token %}
-	<p>
-	  {{ userform }}
-	</p>
-	<p>
-	  {{ profileform }}
-	</p>
-	<p>
-	  <input type="submit" value="Create the account" />
-	</p>
+	<div class="row">
+	  <div class="col-md-6 form-group">
+	    {% bootstrap_form userform %}
+	  </div>
+	  <div class="col-md-6 form-group">
+	    {% bootstrap_form profileform %}
+	  </div>
+	</div>
+	<div class="row">
+	  <input class="btn btn-default" type="submit" value="Create the account" />
+	</div>
 	<p>
 	  (*): Required items.
 	</p>
