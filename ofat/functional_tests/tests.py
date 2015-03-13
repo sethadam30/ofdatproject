@@ -39,3 +39,17 @@ class NewVisitorTest(LiveServerTestCase):
 
         #After signing up and having a first view of the full web app the user
         #quits OFAT
+
+    def test_layout_and_styling(self):
+        #User goes to the home page
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1024, 768)
+
+        #User notices input box
+        inputbox = self.browser.find_element_by_id('id_username')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=5
+        )
+        
