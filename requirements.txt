@@ -1,3 +1,4 @@
-#Python requirements
-pip install django
-pip install django-bootstrap3
+#Python pip requirements
+django
+django-bootstrap3
+django-forums
