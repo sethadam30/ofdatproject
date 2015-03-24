@@ -32,7 +32,7 @@ TEMPLATE_CONTEXT_PROCESSORS = ( #Required for pybb
 )
 
 ALLOWED_HOSTS = []
-
+SITE_ID = 1 #Required for pybb
 
 # Application definition
 
@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', #Required for pybb
+    'django_extensions',
     'bootstrap3',
     'pybb',
     'main',
@@ -92,7 +94,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = '/var/www/ofat/static' #For deployment
+STATIC_ROOT = '/var/www/ofat/static' #For deployment
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     #'/var/www/ofat/static/',
