@@ -94,8 +94,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/var/www/ofat/static' #For deployment
+STATIC_ROOT = os.path.expanduser('~/virtualenvs/ofatproject/static') #For deployment
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    #'/var/www/ofat/static/',
+    #os.path.expanduser('~/virtualenvs/ofatproject/static'),
 )

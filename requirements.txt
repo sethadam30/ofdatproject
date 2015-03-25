@@ -1,5 +1,12 @@
 #Python pip requirements
+##Main django packages
+ipython
 django
+django-extensions
+Werkzeug
 django-bootstrap3
-pybbm
+uwsgi
+##Forum and dependencies
+#pybbm #currently install with beukueb github fork
 bbcode
+Pillow
