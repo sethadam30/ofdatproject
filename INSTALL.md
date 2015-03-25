@@ -15,6 +15,7 @@ TODO: server requirements
     cd ~/virtualenvs
     git clone https://github.ugent.be/cvneste/ofat.git ~/virtualenvs/ofatproject
         #If askpass problem 'unset SSH_ASKPASS'
+    git clone https://github.com/beukueb/pybbm.git ~/virtualenvs/pybbm #forum functionality
     virtualenv -p /usr/local/bin/python3.3 ~/virtualenvs/ofatproject
     source ~/virtualenvs/ofatproject/bin/activate
     pip install -r ~/virtualenvs/ofatproject/requirements.txt
@@ -25,7 +26,8 @@ TODO: server requirements
     python manage.py collectstatic
     python manage.py runserver 0.0.0.0:8000 #Test server
 
-    #Nginx setup
+ ### Nginx setup
+ 
     cp /etc/nginx/uwsgi_params ~/virtualenvs/ofatproject/ofat/ofat/
     cat > ~/virtualenvs/ofatproject/ofat/ofat/nginx_ofat.conf <<EOF
     	# nginx_ofat.conf
@@ -102,4 +104,39 @@ TODO: server requirements
     uwsgi --ini ~/virtualenvs/ofatproject/ofat/ofat/uwsgi_ofat.ini &
     ##Test that you can see the OFAT homepage in your browser
     disown #Then it will not shutdown after logging out of the shell
-    
+
+### Supervisor setup
+
+At this point the web app would already be functional, but the extra
+processes such as uwsgi, would need to be started up manually after
+each restart.
+
+Assuming supervisord is installed `sudo apt-get install supervisord &&
+sudo chkconfig supervisord on`, the following commands will automate
+the startup of all necessary processes.
+
+    cat >> /etc/supervisord.conf <<EOF
+        [program:uwsgi]
+	command=bash -c "source ~/virtualenvs/ofatproject/bin/activate && uwsgi --ini ~/virtualenvs/ofatproject/ofat/ofat/uwsgi_ofat.ini"
+	priority=888
+	user=christophe
+
+	[program:celery]
+	command=bash -c "source ~/virtualenvs/ofatproject/bin/activate && ~/virtualenvs/ofatproject/bin/celery -A ofat worker -l info"
+	numprocs=1
+	directory=/home/christophe/virtualenvs/ofatproject/ofat
+	priority=999
+	startsecs=10
+	startretries=3
+	user=christophe
+	redirect_stderr=true
+	stdout_logfile=/var/tmp/celery.log
+    EOF
+
+supervisord.conf still needed to be ammended with the following, as supervisorctl was not working:
+
+    [unix_http_server]
+    file=/var/tmp/supervisor.sock
+
+    [rpcinterface:supervisor]
+    supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
