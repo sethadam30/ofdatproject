@@ -8,5 +8,6 @@ django-bootstrap3
 uwsgi
 ##Forum and dependencies
 #pybbm #currently install with beukueb github fork
+django-annoying
 bbcode
 Pillow
