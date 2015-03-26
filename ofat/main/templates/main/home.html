@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 
-{% block content %}
+{% block navigation %}
 
 <!--/* Move down content because we have a fixed navbar that is 50px tall */
 body {
@@ -33,8 +33,10 @@ body {
           </form>
         </div><!--/.navbar-collapse -->
       </div>
-    </nav>
+</nav>
+{% endblock %}
 
+{% block content %}
     <!-- Main jumbotron for primary call to action -->
     <div class="jumbotron">
       <div class="container">
@@ -62,8 +64,11 @@ body {
         </div>
         <div class="col-md-4">
           <h2>Tools</h2>
-          <p>In the first wave of tools the following tools will be available in OFAT:<br />
-	    The STR analysis tools STRait Razor and TSSV. The general DNA analysis tool MyFLq. A mitochondrial analysis tool ... </p>
+          <p>In the first wave of tools the following tools will be
+	    available in OFAT:<br /> A module for generic STR/SNP
+	    analysis (a merged version of STRait Razor and MyFLq). A
+	    module for mitochondrial analysis. A generic report
+	    visualization module.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
        </div>
         <div class="col-md-4">

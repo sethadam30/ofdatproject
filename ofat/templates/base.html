@@ -1,14 +1,40 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<!--Parts adapted from https://github.com/twbs/bootstrap/blob/master/docs/examples/theme/index.html-->
+<html lang="en">
   <head>
-    <title>{% block headtitle %}OFAT{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
+    <!-- The above 3 meta tags must come first in the head -->
+    <meta name="description" content="Open Forensic Analysis Toolbox">
+    <meta name="author" content="Christophe Van Neste">
+    <!--link rel="icon" href="favicon.ico"-->
+
+    <title>{% block headtitle %}OFAT project{% endblock %}</title>
+    
+    <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <!-- Bootstrap theme -->
+    <link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    {% block bootstrapcustomtheme %}
+         <!-- Custom styles for this template -->
+	 <link href="{% static 'css/ofatheme.css' %}" rel="stylesheet"-->
+    {% endblock %}
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
-  <body>
+  <body role="document">
+    {% block navigation %}
+        {% include "defaultnavigation.html" %}
+    {% endblock %}
+
     <div class="container">
+      {% block breadcrumb %}{% endblock %}
       {% block content %}
       <h1>OFAT</h1>
       
