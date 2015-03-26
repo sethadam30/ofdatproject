@@ -8,19 +8,19 @@ python3.4
 
 Deployment documentation
 ------------------------
-These are instructions on how to install the OFAT platform outside of a container in a server environment.
+These are instructions on how to install the OFDAT platform outside of a container in a server environment.
 TODO: server requirements
 
     mkdir ~/virtualenvs
     cd ~/virtualenvs
-    git clone https://github.ugent.be/cvneste/ofat.git ~/virtualenvs/ofatproject
+    git clone https://github.ugent.be/cvneste/ofdat.git ~/virtualenvs/ofdatproject
         #If askpass problem 'unset SSH_ASKPASS'
     git clone https://github.com/beukueb/pybbm.git ~/virtualenvs/pybbm #forum functionality
-    virtualenv -p /usr/local/bin/python3.3 ~/virtualenvs/ofatproject
-    source ~/virtualenvs/ofatproject/bin/activate
-    pip install -r ~/virtualenvs/ofatproject/requirements.txt
-    mkdir ~/virtualenvs/ofatproject/{static,media}
-    cd ~/virtualenvs/ofatproject/ofat
+    virtualenv -p /usr/local/bin/python3.3 ~/virtualenvs/ofdatproject
+    source ~/virtualenvs/ofdatproject/bin/activate
+    pip install -r ~/virtualenvs/ofdatproject/requirements.txt
+    mkdir ~/virtualenvs/ofdatproject/{static,media}
+    cd ~/virtualenvs/ofdatproject/ofdat
     python manage.py migrate
     python manage.py createsuperuser
     python manage.py collectstatic
@@ -28,13 +28,13 @@ TODO: server requirements
 
  ### Nginx setup
  
-    cp /etc/nginx/uwsgi_params ~/virtualenvs/ofatproject/ofat/ofat/
-    cat > ~/virtualenvs/ofatproject/ofat/ofat/nginx_ofat.conf <<EOF
-    	# nginx_ofat.conf
+    cp /etc/nginx/uwsgi_params ~/virtualenvs/ofdatproject/ofdat/ofdat/
+    cat > ~/virtualenvs/ofdatproject/ofdat/ofdat/nginx_ofdat.conf <<EOF
+    	# nginx_ofdat.conf
 
 	# the upstream component nginx needs to connect to
-	upstream djangofat {
-		 server unix:///home/christophe/virtualenvs/ofatproject/ofat/ofat/nginx_ofat.sock; # file socket - amend as required
+	upstream djangofdat {
+		 server unix:///home/christophe/virtualenvs/ofdatproject/ofdat/ofdat/nginx_ofdat.sock; # file socket - amend as required
 	         #server 127.0.0.1:8001; # web port socket
 		 }
 
@@ -43,7 +43,7 @@ TODO: server requirements
     	       # the port your site will be served on
 	       listen      80;
 	       # the domain name it will serve for
-	       server_name ofat.van-neste.be; # substitute your machine's IP address or FQDN
+	       server_name ofdat.van-neste.be; # substitute your machine's IP address or FQDN
 	       charset     utf-8;
 
 	       # max upload size
@@ -51,34 +51,34 @@ TODO: server requirements
 
 	# Django media
 	    location /media  {
-	             alias /home/christophe/virtualenvs/ofatproject/media;  # your Django project's media files - amend as required
+	             alias /home/christophe/virtualenvs/ofdatproject/media;  # your Django project's media files - amend as required
 	    }
 
 	    location /static {
-	    	     alias /home/christophe/virtualenvs/ofatproject/static; # your Django project's static files - amend as required
+	    	     alias /home/christophe/virtualenvs/ofdatproject/static; # your Django project's static files - amend as required
    	    }
 
     	# Finally, send all non-media requests to the Django server.
     	   location / {
-           	    uwsgi_pass  djangofat;
-        	    include     /home/christophe/virtualenvs/ofatproject/ofat/ofat/uwsgi_params; # amend as required
+           	    uwsgi_pass  djangofdat;
+        	    include     /home/christophe/virtualenvs/ofdatproject/ofdat/ofdat/uwsgi_params; # amend as required
            }
 	   }
     EOF
     #Amend for current installing user
-    sed -i "s&/home/christophe&${HOME}&g" ~/virtualenvs/ofatproject/ofat/ofat/nginx_ofat.conf
-    sudo ln -s ~/virtualenvs/ofatproject/ofat/ofat/nginx_ofat.conf /etc/nginx/conf.d/
-    cat > ~/virtualenvs/ofatproject/ofat/ofat/uwsgi_ofat.ini <<EOF
-        # uwsgi_ofat.ini file
+    sed -i "s&/home/christophe&${HOME}&g" ~/virtualenvs/ofdatproject/ofdat/ofdat/nginx_ofdat.conf
+    sudo ln -s ~/virtualenvs/ofdatproject/ofdat/ofdat/nginx_ofdat.conf /etc/nginx/conf.d/
+    cat > ~/virtualenvs/ofdatproject/ofdat/ofdat/uwsgi_ofdat.ini <<EOF
+        # uwsgi_ofdat.ini file
     	[uwsgi]
     
         # Django-related settings
     	# the base directory (full path)
-    	chdir        = /home/christophe/virtualenvs/ofatproject/ofat/
+    	chdir        = /home/christophe/virtualenvs/ofdatproject/ofdat/
 	# Django's wsgi file
-    	module       = ofat.wsgi
+    	module       = ofdat.wsgi
     	# the virtualenv (full path)
-    	home         = /home/christophe/virtualenvs/ofatproject
+    	home         = /home/christophe/virtualenvs/ofdatproject
     
         # process-related settings
     	# master
@@ -86,23 +86,23 @@ TODO: server requirements
 	# maximum number of worker processes
 	processes    = 10
 	# the socket (use the full path to be safe
-    	socket       = /home/christophe/virtualenvs/ofatproject/ofat/ofat/nginx_ofat.sock
+    	socket       = /home/christophe/virtualenvs/ofdatproject/ofdat/ofdat/nginx_ofdat.sock
     	# ... with appropriate permissions - may be needed
     	chmod-socket = 666
     	# clear environment on exit
     	vacuum       = true
     EOF
     #Amend for current installing user
-    sed -i "s&/home/christophe&${HOME}&g"  ~/virtualenvs/ofatproject/ofat/ofat/uwsgi_ofat.ini
+    sed -i "s&/home/christophe&${HOME}&g"  ~/virtualenvs/ofdatproject/ofdat/ofdat/uwsgi_ofdat.ini
     
     #Test nginx setup
     ##Test that the socket directory is readable
-    if ! sudo -u nobody ls ~/virtualenvs/ofatproject/ofat/ofat then echo "Socket is not readable, fix the path"; fi
-    ##Restart nginx to load ofat configuration
+    if ! sudo -u nobody ls ~/virtualenvs/ofdatproject/ofdat/ofdat then echo "Socket is not readable, fix the path"; fi
+    ##Restart nginx to load ofdat configuration
     sudo service nginx restart
     ##Startup socket
-    uwsgi --ini ~/virtualenvs/ofatproject/ofat/ofat/uwsgi_ofat.ini &
-    ##Test that you can see the OFAT homepage in your browser
+    uwsgi --ini ~/virtualenvs/ofdatproject/ofdat/ofdat/uwsgi_ofdat.ini &
+    ##Test that you can see the OFDAT homepage in your browser
     disown #Then it will not shutdown after logging out of the shell
 
 ### Supervisor setup
@@ -116,15 +116,16 @@ sudo chkconfig supervisord on`, the following commands will automate
 the startup of all necessary processes.
 
     cat >> /etc/supervisord.conf <<EOF
+    
         [program:uwsgi]
-	command=bash -c "source ~/virtualenvs/ofatproject/bin/activate && uwsgi --ini ~/virtualenvs/ofatproject/ofat/ofat/uwsgi_ofat.ini"
+	command=bash -c "source ~/virtualenvs/ofdatproject/bin/activate && uwsgi --ini ~/virtualenvs/ofdatproject/ofdat/ofdat/uwsgi_ofdat.ini"
 	priority=888
 	user=christophe
 
 	[program:celery]
-	command=bash -c "source ~/virtualenvs/ofatproject/bin/activate && ~/virtualenvs/ofatproject/bin/celery -A ofat worker -l info"
+	command=bash -c "source ~/virtualenvs/ofdatproject/bin/activate && ~/virtualenvs/ofdatproject/bin/celery -A ofdat worker -l info"
 	numprocs=1
-	directory=/home/christophe/virtualenvs/ofatproject/ofat
+	directory=/home/christophe/virtualenvs/ofdatproject/ofdat
 	priority=999
 	startsecs=10
 	startretries=3

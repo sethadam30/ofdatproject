@@ -12,14 +12,14 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.browser.quit()
 
     def test_can_sign_up(self):
-        #When a user arrives at the OFAT homepage the following
-        #information should be available: OFAT in title and header,
+        #When a user arrives at the OFDAT homepage the following
+        #information should be available: OFDAT in title and header,
         #signup/login, tabs for about, contact
 
         self.browser.get(self.live_server_url)
-        self.assertIn('OFAT', self.browser.title)
+        self.assertIn('OFDAT', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('OFAT', header_text)
+        self.assertIn('OFDAT', header_text)
         
         #The user is not yet registered and signs up
         #User goes to the registration page
@@ -39,7 +39,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #users
 
         #After signing up and having a first view of the full web app the user
-        #quits OFAT
+        #quits OFDAT
 
     def test_layout_and_styling(self):
         #User goes to the home page

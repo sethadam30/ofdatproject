@@ -1,10 +1,10 @@
-Open Forensic Analysis Platform
-===============================
+Open Forensic DNA Analysis Platform
+===================================
 
 This project aims to bring together the different open-source tools
 for forensic DNA analysis by massively parallel sequencing.
 
-OFAT Consortium
+OFDAT Consortium
 ---------------
 * Institute of Applied Genetics, University of North Texas Health Science Center, Prof. Dr. Bruce Budowle
 * Forensic DNA Laboratory, Ghent University, Prof. Dr. Dieter Deforce

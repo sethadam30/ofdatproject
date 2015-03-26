@@ -1,5 +1,5 @@
 """
-Django settings for ofat project.
+Django settings for ofdat project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -61,9 +61,9 @@ MIDDLEWARE_CLASSES = (
     'pybb.middleware.PybbMiddleware', #pybb
 )
 
-ROOT_URLCONF = 'ofat.urls'
+ROOT_URLCONF = 'ofdat.urls'
 
-WSGI_APPLICATION = 'ofat.wsgi.application'
+WSGI_APPLICATION = 'ofdat.wsgi.application'
 
 
 # Database
@@ -94,8 +94,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.expanduser('~/virtualenvs/ofatproject/static') #For deployment
+STATIC_ROOT = os.path.expanduser('~/virtualenvs/ofdatproject/static') #For deployment
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    #os.path.expanduser('~/virtualenvs/ofatproject/static'),
+    #os.path.expanduser('~/virtualenvs/ofdatproject/static'),
 )
