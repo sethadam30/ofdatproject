@@ -11,3 +11,5 @@ uwsgi
 django-annoying
 bbcode
 Pillow
+##Documentation
+mkdocs
