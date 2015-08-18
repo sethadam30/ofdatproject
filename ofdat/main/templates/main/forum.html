@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+<script>
+  window.scrollback = {"room":"ofdat","form":"canvas","minimize":false,"container":"sbcontainer"};
+  (function(d,s,h,e){e=d.createElement(s);e.async=1;e.src=(location.protocol === "https:" ? "https:" : "http:") + "//scrollback.io/client.min.js";
+  d.getElementsByTagName(s)[0].parentNode.appendChild(e);}(document,"script"));
+</script>
+{% endblock %}
+{% comment %}{% endcomment %}
+
+{% block content %}
+<div id="sbcontainer" style="height:600px;"></div>
+{% endblock %}
