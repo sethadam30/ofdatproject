@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/OFDAT/ofdatproject.svg)](https://travis-ci.org/OFDAT/ofdatproject)
+
 Open Forensic DNA Analysis Platform
 ===================================
 
