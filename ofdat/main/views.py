@@ -3,6 +3,9 @@ from django.http import HttpResponse
 
 # Create your views here.
 def homepage(request):
+    """
+    Simple docstring to test the documentation.
+    """
     from django.contrib.auth.forms import UserCreationForm
     from main.forms import UserProfileForm
 
