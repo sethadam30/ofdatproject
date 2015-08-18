@@ -13,3 +13,4 @@ bbcode
 Pillow
 ##Documentation
 mkdocs
+doxypy
