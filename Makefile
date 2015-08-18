@@ -1,5 +1,10 @@
+
+
 usage: # Print Targets
 	@grep '^[^#[:space:]].*:' Makefile
+
+runserver:
+	cd ofdat && python manage.py runserver
 
 docs:
 	doxygen docs/Doxyfile
@@ -7,5 +12,9 @@ docs:
 
 clean:
 	git clean -fdX
+	cd ofdat && python manage.py migrate
 
-.PHONY: docs clean
+test:
+	cd ofdat && python manage.py test
+
+.PHONY: docs clean test runserver
