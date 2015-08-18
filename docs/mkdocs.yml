@@ -1,4 +1,7 @@
 site_name: OFDAT Documentation
+site_url: http://www.ofdat.org
+repo_url: https://github.com/beukueb/ofdat
+site_author: Christophe Van Neste
 pages:
 - [index.md, Home]
 - [about.md, About]

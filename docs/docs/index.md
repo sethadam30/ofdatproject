@@ -1,6 +1,6 @@
 # OFDAT Documentation
 
-For full documentation visit [ofdat.org](http://ofdat.org).
+For full documentation visit [ofdat.org](http://www.ofdat.org).
 
 ## Documentation commands
 
