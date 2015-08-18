@@ -26,13 +26,8 @@ TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = (
     'templates/',
 )
-TEMPLATE_CONTEXT_PROCESSORS = ( #Required for pybb
-    'django.contrib.auth.context_processors.auth',
-    'pybb.context_processors.processor',
-)
 
 ALLOWED_HOSTS = []
-SITE_ID = 1 #Required for pybb
 
 # Application definition
 
@@ -43,10 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', #Required for pybb
     'django_extensions',
     'bootstrap3',
-    'pybb',
     'main',
 )
 
@@ -58,7 +51,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'pybb.middleware.PybbMiddleware', #pybb
 )
 
 ROOT_URLCONF = 'ofdat.urls'
