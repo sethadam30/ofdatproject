@@ -3,6 +3,7 @@ usage: # Print Targets
 
 docs:
 	doxygen docs/Doxyfile
+	cd docs && mkdocs build
 
 clean:
 	git clean -fdX
