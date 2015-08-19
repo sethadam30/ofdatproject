@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'main.views.homepage', name='home'),
-    url(r'^forum$', TemplateView.as_view(template_name='main/forum.html'), name='forum'),
+    url(r'^forum/$', TemplateView.as_view(template_name='main/forum.html'), name='forum'),
     # url(r'^blog/', include('blog.urls')),
 
     #(r'^forum/', include('pybb.urls', namespace='pybb')),
