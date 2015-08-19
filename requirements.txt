@@ -8,5 +8,6 @@ django-bootstrap3
 uwsgi
 ##Testing
 selenium
+nose
 ##Documentation
 mkdocs

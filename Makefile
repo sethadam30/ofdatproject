@@ -15,6 +15,9 @@ clean:
 	cd ofdat && python manage.py migrate
 
 test:
+	#Django tests
 	cd ofdat && python manage.py test
+	#Documentation tests
+	nosetests --with-doctest --doctest-extension=md -w docs/docs/
 
 .PHONY: docs clean test runserver
