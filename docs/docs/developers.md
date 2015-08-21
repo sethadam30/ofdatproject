@@ -148,7 +148,7 @@ OFDAT core development<a name="core"></a>
 The OFDAT core comprises the main web application to register forensic
 cases and MPS samples; the framework to add tools; and a set of
 interactive functionality that is more difficult to develop
-separately.
+as separate tools.
 
 If you want to contribute to the OFDAT core, start by adding
 functionality by means of *pull requests*. After a few valued
