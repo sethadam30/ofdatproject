@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'bootstrap3',
     'main',
+    'tools',
 )
 
 MIDDLEWARE_CLASSES = (
