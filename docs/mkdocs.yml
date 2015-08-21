@@ -4,5 +4,6 @@ repo_url: https://github.com/beukueb/ofdat
 site_author: Christophe Van Neste
 pages:
 - [index.md, Home]
+- [developers.md, Contributing]
 - [about.md, About]
 theme: readthedocs

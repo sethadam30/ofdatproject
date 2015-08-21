@@ -6,6 +6,9 @@ usage: # Print Targets
 runserver:
 	cd ofdat && python manage.py runserver
 
+rundocs:
+	cd docs && mkdocs serve
+
 docs:
 	doxygen docs/Doxyfile
 	cd docs && mkdocs build
@@ -20,4 +23,4 @@ test:
 	#Documentation tests
 	nosetests --with-doctest --doctest-extension=md -w docs/docs/
 
-.PHONY: docs clean test runserver
+.PHONY: docs clean test runserver rundocs
