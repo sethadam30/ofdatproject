@@ -92,10 +92,10 @@ OFDAT development itself, except for two requirements:
 OFDAT will track the user's execution of any module. The specific
 command with which the module was executed will be logged. In order to
 do that the CLI needs to be incorporated in the Django web
-application. The CLI should be specified with the following xml structure:
+application. The CLI should be specified with the following XML structure:
 
     <?xml version="1.0" encoding="UTF-8"?>
-    <tool id="toolExample" version="1.0.0" name="Example xml tool config">
+    <tool id="toolExample" version="1.0.0" name="Example XML tool config">
      <description>
       A more elaborate description of the tool.
       This can be multiple lines and include *markdown*
@@ -115,11 +115,11 @@ application. The CLI should be specified with the following xml structure:
      </tests>
     </tool>
 
-The general format of the xml has been derived from the
+The general format of the XML has been derived from the
 [Galaxy-project tool configuration
 ](https://wiki.galaxyproject.org/Admin/Tools/ToolConfigSyntax). Adaptations
 have been made to work with Django. The *command* tags should only contain the
-program name; *command* atttribute *interpreter* is only required for
+program name; *command* attribute *interpreter* is only required for
 interpreted scripts without a shebang. The argument types can be:
 
 * int
@@ -127,16 +127,34 @@ interpreted scripts without a shebang. The argument types can be:
 * str
 * file
 
-They are mapped to Django field types. The validity of the xml can be
+They are mapped to Django field types. The validity of the XML can be
 tested as follows
 
     >>> from ofdat.tools.config import parseConfig
-    ... parseConfig('documentationExample.xml',testValidity=True)
+    ... parseConfig('tools/documentationExample.xml',testValidity=True)
     True
     
 ### Integration within OFDAT
 
-
+To add a forensic module to OFDAT, make a sub-directory under
+`ofdat\tools` with the same name as the *tool id* in your XML
+configuration. This new directory should contain the XML config, the
+program and all of its dependencies. If necessary, the directory can
+contain a virtualenv.
 
 OFDAT core development<a name="core"></a>
 ----------------------
+
+The OFDAT core comprises the main web application to register forensic
+cases and MPS samples; the framework to add tools; and a set of
+interactive functionality that is more difficult to develop
+separately.
+
+If you want to contribute to the OFDAT core, start by adding
+functionality by means of *pull requests*. After a few valued
+contributions, you will be added to the core development team.
+
+### License
+
+By contributing your code, you agree to license your contribution
+under the [MIT License](https://github.com/OFDAT/ofdatproject/LICENSE)
